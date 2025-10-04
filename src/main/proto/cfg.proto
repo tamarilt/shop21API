@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option java_package = "backend.shop21auth";
+option java_outer_classname = "AuthProto";
+
+service AuthService {
+  rpc RegisterUser (RegisterRequest) returns (RegisterReply) {}
+  rpc RecoverPassword (RecoverPasswordRequest) returns (RecoverPasswordReply) {}
+  rpc LoginUser (LoginRequest) returns (LoginReply) {}
+  rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenReply) {}
+  rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordReply) {}
+}
+
+message RegisterRequest {
+  string email = 1;
+  string name = 2;
+  string surname = 3;
+  string phone_number = 4;
+  string password = 5;
+}
+
+message RegisterReply {
+  string message = 1;
+}
+
+message RecoverPasswordRequest {
+  string email = 1;
+}
+
+message RecoverPasswordReply {
+  string message = 1;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginReply {
+  string message = 1;
+  string token = 2;
+}
+
+message ValidateTokenRequest {
+  string token = 1;
+}
+
+message ValidateTokenReply {
+  string message = 1;
+  string userId = 2;
+}
+
+message ChangePasswordRequest {
+  string userId = 1;
+  string oldPassword = 2;
+  string newPassword = 3;
+}
+
+message ChangePasswordReply {
+  string message = 1;
+}
