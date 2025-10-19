@@ -36,6 +36,9 @@ public class ClientServices {
 
     @Transactional
     public ClientResponseDTO createClient(ClientCreateDTO clientDTO) {
+        if (clientDTO.getAddress() == null) {
+            throw new NullPointerException("Address cannot be null");
+        }
         Addresses address = addressesMapper.toEntity(clientDTO.getAddress());
         UUID addressId = addressesDAO.save(address);
         Client client = clientMapper.toEntity(clientDTO, addressId);
